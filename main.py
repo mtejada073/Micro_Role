@@ -1,7 +1,7 @@
 from tokenize import String
 from typing import Union
 from xxlimited import Str
-from fastapi import FastAPI
+from fastapi import FastAPI, status, Response
 import requests
 from prometheus_fastapi_instrumentator import Instrumentator
 import logging.config
@@ -30,6 +30,7 @@ def read_item(encryptedToken : str):
     for item in list:
         if item["encryptedToken"]==encryptedToken:
             return item
+    return Response(status_code= status.HTTP_204_NO_CONTENT)
 
 
 def roleUsers():
